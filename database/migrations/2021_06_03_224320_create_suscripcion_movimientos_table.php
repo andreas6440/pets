@@ -15,7 +15,8 @@ class CreateSuscripcionMovimientosTable extends Migration
     {
         Schema::create('suscripcion_movimientos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('suscripcion_id');
+            $table->unsignedBigInteger('suscripcion_id');
+            $table->foreign('suscripcion_id')->references('id')->on('suscripcions')->onDelete('cascade');
             $table->string('tipo');
             $table->json('data');
             $table->timestamps();

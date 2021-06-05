@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'clients' => [
+        'create' => 'the client has been created successfully'
+    ]
 
 ];

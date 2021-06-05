@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});*/
+
+Route::prefix('v1')->group(function () {
+    Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
+    Route::post('/client/show/{id}', [ClientController::class, 'show'])
+        ->where('id', '[0-9]+')->name('client.show');
 });

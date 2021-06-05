@@ -15,7 +15,8 @@ class CreateSuscripcionsTable extends Migration
     {
         Schema::create('suscripcions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mascota_id');
+            $table->unsignedBigInteger('mascota_id');
+            $table->foreign('mascota_id')->references('id')->on('mascotas')->onDelete('cascade');
             $table->dateTime('fecha_alta_suscripcion');
             $table->decimal('costo_mensual_de_suscripcion');
             $table->timestamps();

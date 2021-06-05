@@ -15,18 +15,13 @@ class Client extends Model
      * @var bool
      */
     public $incrementing = true;
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'email';
+
     /**
      * The model's default values for attributes.
      *
      * @var array
      */
-    protected $attributes = [
+    protected $fillable = [
         'nombre',
         'apellido',
         'email'

@@ -15,7 +15,8 @@ class CreateMascotasTable extends Migration
     {
         Schema::create('mascotas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('nombre');
             $table->string('raza');
             $table->date('fecha_nacimiento');
