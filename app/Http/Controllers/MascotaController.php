@@ -75,16 +75,12 @@ class MascotaController extends Controller
      */
     public function store(MascotaStore $request, $client)
     {
-
-
-
         $mascota = new Mascota();
         $mascota->client_id = $client;
         $mascota->nombre = $request->nombre;
         $mascota->raza = $request->raza;
         $mascota->fecha_nacimiento = $request->fecha_nacimiento;
         $mascota->save();
-
         session()->flash('success', trans('messages.mascota.action.create'));
         return response()->redirectToRoute('mascota.list', ['client' => $client]);
     }
@@ -108,7 +104,16 @@ class MascotaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mascota = Mascota::findOrFail($id);
+
+        return response(
+            view(
+                'mascota.edit',
+                ['mascota' => $mascota]
+            ),
+            200
+        );
+        dd('sad');
     }
 
     /**
@@ -118,9 +123,16 @@ class MascotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MascotaStore $request, $id)
     {
-        //
+        $mascota = Mascota::findOrFail($id);
+        $mascota->nombre = $request->nombre;
+        $mascota->raza = $request->raza;
+        $mascota->fecha_nacimiento = $request->fecha_nacimiento;
+        $mascota->save();
+
+        session()->flash('success', trans('messages.mascota.action.edit'));
+        return response()->redirectToRoute('mascota.list', ['client' => $mascota->client_id]);
     }
 
     /**

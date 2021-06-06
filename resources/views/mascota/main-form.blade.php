@@ -12,7 +12,7 @@
         @include('common.input_text', [
             'name' => 'raza',
             'label' => trans('fields.mascota.race'),
-            'value' => $mascota->apellido,
+            'value' => $mascota->raza,
         ])
     </div>
 </div>
