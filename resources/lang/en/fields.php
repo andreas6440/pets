@@ -14,8 +14,11 @@ return [
     */
 
     'client' => [
-        'list' => 'Lista de clientes',
-        'create' => 'the client has been created successfully'
+        'id' => 'ID',
+        'nombre' => 'Nombre',
+        'apellido' => 'Apellido',
+        'email' => 'Email',
+        'action' => 'Acciones'
     ]
 
 ];

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientStore;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\DataTables;
 
 class ClientController extends Controller
 {
@@ -15,7 +17,32 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+
+        return response(
+            view('client.index'),
+            200
+        );
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable()
+    {
+        $client = Client::orderBy('id');
+        $client = $client->get()->map(function (Client $client) {
+            return array_merge($client->toArray(), [
+                'edit_url' => route('client.edit', [
+                    'id' => $client->id,
+                ]),
+                'delete_url' =>  route('client.destroy', [
+                    'id' => $client->id,
+                ]),
+
+            ]);
+        });
+        return datatables()->of($client->toArray())->toJson();
     }
 
     /**
