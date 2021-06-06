@@ -143,6 +143,9 @@ class MascotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mascota::findOrFail($id)->delete();
+
+        session()->flash('success', trans('messages.mascota.action.delete'));
+        return redirect()->back();
     }
 }

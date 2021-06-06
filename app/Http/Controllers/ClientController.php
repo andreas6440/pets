@@ -137,6 +137,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = Client::findOrFail($id);
+        $client->mascota()->delete();
         $client->delete();
         session()->flash('success', trans('messages.client.action.delete'));
         return response()->redirectToRoute('client.list');
