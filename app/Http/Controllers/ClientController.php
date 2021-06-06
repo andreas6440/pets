@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientStore;
 use App\Models\Client;
+use App\Models\Mascota;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
@@ -139,6 +140,8 @@ class ClientController extends Controller
         $client = Client::findOrFail($id);
         $client->mascota()->delete();
         $client->delete();
+
+
         session()->flash('success', trans('messages.client.action.delete'));
         return response()->redirectToRoute('client.list');
     }

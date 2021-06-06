@@ -25,6 +25,7 @@ return [
         'name' => 'Nombre',
         'race' => 'Raza',
         'date' => 'Fecha de nacimiento',
+        'suscripcion' => 'Fecha de suscripción',
         'action' => 'Acciones'
     ],
     'suscripcion' => [

@@ -24,7 +24,7 @@
                         </div>
                         <div class="row my-2">
                             <div class="col">                               
-                                <a href="{{ URL::previous() }}" class="btn btn-secondary"> {{ trans('fields.actions.cancel') }}</a>                                
+                                <a href="{{ route('client.list') }}" class="btn btn-secondary"> {{ trans('fields.actions.cancel') }}</a>                                
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">{{ trans('fields.actions.save') }}</button>

@@ -23,6 +23,7 @@
                                 <th>{{ trans('fields.mascota.name') }}</th>
                                 <th>{{ trans('fields.mascota.race') }}</th>
                                 <th>{{ trans('fields.mascota.date') }}</th>
+                                <th>{{ trans('fields.mascota.suscripcion') }}</th>
                                 <th>{{ trans('fields.mascota.action') }}</th>
                                 
                             </tr>
@@ -50,6 +51,7 @@
                     {data: 'nombre'},
                     {data: 'raza'},
                     {data: 'fecha_nacimiento'},
+                    {data: 'suscripcion'},
                     {
                         defaultContent: null,
                         sortable: false,
@@ -67,7 +69,7 @@
                             
                             if(full.delete_url) {
                                 base += `<li class="list-inline-item">
-                                <a href="${full.delete_url}" class="btn btn-block btn-danger deleteButton" title="Borrar">
+                                <a data-href="${full.delete_url}" href="#"  class="btn btn-block btn-danger deleteButton" title="Borrar">
                                     <i class="fas fa-user"></i>
                                 </a>
                             </li>`;
