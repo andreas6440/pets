@@ -22,7 +22,7 @@
             'name' => 'email',
             'label' => trans('fields.client.email'),
             'value' => $client->email ,
-            'tyoe' =>'email'
+            'type' =>'email'
         ])
     </div>
 </div>

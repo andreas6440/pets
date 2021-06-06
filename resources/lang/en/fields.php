@@ -24,7 +24,7 @@ return [
         'id' => 'ID',
         'name' => 'Nombre',
         'race' => 'Raza',
-        'date' => 'Nacimiento',
+        'date' => 'Fecha de nacimiento',
         'action' => 'Acciones'
     ],
     'actions' => [

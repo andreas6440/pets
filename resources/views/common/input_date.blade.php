@@ -20,6 +20,6 @@ if(!isset($readOnly)) {
 
 <div>
     <label class="{{ $labelClass }}" for="{{ $name }}">{{ $label }}</label>
-    <input type="{{ $type ?? 'text' }}" class="form-control {{ $inputClass }}" {{ $id ? "id=$id" : '' }} name="{{ $name }}" value='{{ old($name, $value) }}' {{ $readOnly ? 'readOnly' : '' }}/>
+    <input  type="text"  autocomplete="off" placeholder="yyyy-mm-dd" class="form-control datepicker  {{ $inputClass }}" {{ $id ? "id=$id" : '' }} name="{{ $name }}" value='{{ old($name, $value) }}' {{ $readOnly ? 'readOnly' : '' }} "/>
     @include('common.errors', ['errors' => $errors->get($name)])
 </div>

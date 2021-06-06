@@ -2,7 +2,7 @@
 @extends('layout.page')
 
 @php(
-    $title = trans('messages.client.create')
+    $title = trans('messages.mascota.create')
 )
 @section('title', implode(' - ', [
     config('app.name'),
@@ -17,10 +17,10 @@
                     <h1 class="m-0 text-dark">{{ $title }}</h1>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('client.store') }}">
+                    <form method="POST" action="{{ route('mascota.store',['client'=>$client->id]) }}">
                         @csrf
                         <div class="row my-2">
-                            @include('client.main-form')
+                            @include('mascota.main-form')
                         </div>
                         <div class="row my-2">
                             <div class="col">                               

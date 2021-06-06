@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MascotaStore;
 use App\Models\Client;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
@@ -50,10 +51,21 @@ class MascotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($client)
     {
-        //
+        $client = Client::find($client);
+        return response(
+            view(
+                'mascota.create',
+                [
+                    'client' => $client,
+                    'mascota' => new Mascota()
+                ]
+            ),
+            200
+        );
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -61,9 +73,20 @@ class MascotaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MascotaStore $request, $client)
     {
-        //
+
+
+
+        $mascota = new Mascota();
+        $mascota->client_id = $client;
+        $mascota->nombre = $request->nombre;
+        $mascota->raza = $request->raza;
+        $mascota->fecha_nacimiento = $request->fecha_nacimiento;
+        $mascota->save();
+
+        session()->flash('success', trans('messages.mascota.action.create'));
+        return response()->redirectToRoute('mascota.list', ['client' => $client]);
     }
 
     /**

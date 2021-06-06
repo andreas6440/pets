@@ -1842,6 +1842,10 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(".datepicker").datepicker({
+  format: "yyyy-mm-dd"
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

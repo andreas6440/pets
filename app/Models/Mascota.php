@@ -14,7 +14,7 @@ class Mascota extends Model
      *
      * @var array
      */
-    protected $attributes = [
+    protected  $fillable = [
         'client_id',
         'nombre',
         'raza',
