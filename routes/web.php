@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/clients', [ClientController::class, 'index'])->name('clients.list');
+Route::get('/clients', [ClientController::class, 'index'])->name('client.list');
 Route::get('/datatable/clients', [ClientController::class, 'datatable'])->name('clients.list.datatable');
 Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->where('id', '[0-9]+')->name('client.edit');
+Route::post('/clients/{id}/update', [ClientController::class, 'update'])->where('id', '[0-9]+')->name('client.update');
 Route::get('/clients/{id}/destroy', [ClientController::class, 'destroy'])->where('id', '[0-9]+')->name('client.destroy');

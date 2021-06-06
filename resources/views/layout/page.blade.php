@@ -19,7 +19,37 @@
     <div class="container">
       <main>
         <div class="py-5 text-center">
+          <div class="content-header">           
+                @if(session('success'))
+                    <div class="flash-msg flash-msg-success">
+                        <div class="container-fluid">
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i></h4>
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="flash-msg flash-msg-error">
+                        <div class="container-fluid">
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> {{ session('title') }}</h4>
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+               
+                @yield('content_header')
+                
+        </div>
+        <div class="content">
+
           @yield('content')
+        </div>
         </div>
     
       

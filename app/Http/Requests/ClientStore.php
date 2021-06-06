@@ -26,7 +26,7 @@ class ClientStore extends FormRequest
         return [
             'nombre' => 'required|max:255',
             'apellido' => 'required|max:255',
-            'email' => 'required|email|unique:clients,email',
+            'email' => 'required|email|unique:clients,email,' . $this->id,
         ];
     }
 }

@@ -19,6 +19,10 @@ return [
         'apellido' => 'Apellido',
         'email' => 'Email',
         'action' => 'Acciones'
+    ],
+    'actions' => [
+        'cancel' => 'Cancelar',
+        'save_edit' => 'Guardar Cambios'
     ]
 
 ];

@@ -96,7 +96,11 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return response(
+            view('client.edit', ['client' => $client]),
+            200
+        );
     }
 
     /**
@@ -106,9 +110,17 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientStore $request, $id)
     {
-        //
+
+        $client = Client::findOrFail($id);
+        $client->nombre = $request->nombre;
+        $client->apellido = $request->apellido;
+        $client->email = $request->email;
+        $client->save();
+
+        session()->flash('success', trans('messages.client.edit'));
+        return response()->redirectToRoute('client.list');
     }
 
     /**
@@ -119,6 +131,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $client->delete();
+        session()->flash('success', trans('messages.client.delete'));
+        return response()->redirectToRoute('client.list');;
     }
 }

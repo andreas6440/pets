@@ -67,7 +67,7 @@
                             if(full.delete_url) {
                                 base += `<li class="list-inline-item">
                                 <a href="${full.delete_url}" class="btn btn-block btn-danger deleteButton" title="Borrar">
-                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-user"></i>
                                 </a>
                             </li>`;
                             }
