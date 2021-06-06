@@ -23,7 +23,7 @@
                                 <th>{{ trans('fields.client.nombre') }}</th>
                                 <th>{{ trans('fields.client.apellido') }}</th>
                                 <th>{{ trans('fields.client.email') }}</th>
-                                <th>{{ trans('fields.client.accion') }}</th>
+                                <th>{{ trans('fields.client.action') }}</th>
                                 
                             </tr>
                         </thead>

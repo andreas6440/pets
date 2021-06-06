@@ -18,7 +18,7 @@ class CreateSuscripcionsTable extends Migration
             $table->unsignedBigInteger('mascota_id');
             $table->foreign('mascota_id')->references('id')->on('mascotas')->onDelete('cascade');
             $table->dateTime('fecha_alta_suscripcion');
-            $table->decimal('costo_mensual_de_suscripcion');
+            $table->float('costo_suscripcion', 10, 2);
             $table->timestamps();
         });
     }

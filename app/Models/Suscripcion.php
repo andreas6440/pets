@@ -17,6 +17,6 @@ class Suscripcion extends Model
     protected $attributes = [
         'mascota_id',
         'fecha_alta_suscripcion',
-        'costo_mensual_de_suscripcion',
+        'costo_suscripcion',
     ];
 }

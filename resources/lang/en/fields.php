@@ -27,6 +27,14 @@ return [
         'date' => 'Fecha de nacimiento',
         'action' => 'Acciones'
     ],
+    'suscripcion' => [
+        'costo' => 600.50,
+        'tipo' => [
+            'pago',
+            'impago',
+        ]
+
+    ],
     'actions' => [
         'cancel' => 'Cancelar',
         'save_edit' => 'Guardar Cambios',

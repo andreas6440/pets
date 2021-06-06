@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MascotaStore;
 use App\Models\Client;
 use App\Models\Mascota;
+use App\Models\Suscripcion;
+use App\Models\SuscripcionMovimiento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MascotaController extends Controller
@@ -81,6 +84,21 @@ class MascotaController extends Controller
         $mascota->raza = $request->raza;
         $mascota->fecha_nacimiento = $request->fecha_nacimiento;
         $mascota->save();
+
+        $suscripcion = new Suscripcion();
+        $suscripcion->mascota_id = $mascota->id;
+        $suscripcion->fecha_alta_suscripcion = Carbon::now();
+        $suscripcion->costo_suscripcion = trans('fields.suscripcion.costo');
+        $suscripcion->save();
+
+        $movimiento = new SuscripcionMovimiento();
+        $movimiento->suscripcion_id =  $suscripcion->id;
+        $movimiento->tipo = trans('fields.suscripcion.tipo.1');
+        $movimiento->data = json_encode([
+            'cliente' => $mascota->client->toArray(),
+            'mascota' => $mascota->toArray(),
+            'pago' => ['estado' => 'exitoso', 'valor' => trans('fields.suscripcion.costo')]
+        ]);
         session()->flash('success', trans('messages.mascota.action.create'));
         return response()->redirectToRoute('mascota.list', ['client' => $client]);
     }
@@ -113,7 +131,6 @@ class MascotaController extends Controller
             ),
             200
         );
-        dd('sad');
     }
 
     /**
@@ -130,6 +147,9 @@ class MascotaController extends Controller
         $mascota->raza = $request->raza;
         $mascota->fecha_nacimiento = $request->fecha_nacimiento;
         $mascota->save();
+
+
+
 
         session()->flash('success', trans('messages.mascota.action.edit'));
         return response()->redirectToRoute('mascota.list', ['client' => $mascota->client_id]);
