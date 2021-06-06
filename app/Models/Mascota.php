@@ -23,6 +23,10 @@ class Mascota extends Model
 
     public function client()
     {
-        return $this->belongsTo(Client::class, 'id', 'client_id');
+        return $this->hasOne(Client::class, 'id', 'client_id');
+    }
+    public function suscripcion()
+    {
+        return $this->hasOne(Suscripcion::class, 'mascota_id', 'id');
     }
 }

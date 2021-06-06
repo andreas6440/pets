@@ -14,7 +14,7 @@ class SuscripcionMovimiento extends Model
      *
      * @var array
      */
-    protected $attributes = [
+    protected $fillable = [
         'suscripcion_id',
         'tipo',
         'data',

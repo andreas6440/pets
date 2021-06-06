@@ -14,9 +14,18 @@ class Suscripcion extends Model
      *
      * @var array
      */
-    protected $attributes = [
+    protected $fillable = [
         'mascota_id',
         'fecha_alta_suscripcion',
         'costo_suscripcion',
     ];
+
+    public function mascota()
+    {
+        return $this->hasOne(Mascota::class, 'id', 'mascota_id');
+    }
+    public function movimientos()
+    {
+        return $this->hasMany(SuscripcionMovimiento::class, 'suscripcion_id', 'id');
+    }
 }

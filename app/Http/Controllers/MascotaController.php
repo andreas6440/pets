@@ -78,6 +78,7 @@ class MascotaController extends Controller
      */
     public function store(MascotaStore $request, $client)
     {
+
         $mascota = new Mascota();
         $mascota->client_id = $client;
         $mascota->nombre = $request->nombre;
@@ -88,7 +89,7 @@ class MascotaController extends Controller
         $suscripcion = new Suscripcion();
         $suscripcion->mascota_id = $mascota->id;
         $suscripcion->fecha_alta_suscripcion = Carbon::now();
-        $suscripcion->costo_suscripcion = trans('fields.suscripcion.costo');
+        $suscripcion->costo_suscripcion = floatval(trans('fields.suscripcion.costo'));
         $suscripcion->save();
 
         $movimiento = new SuscripcionMovimiento();
@@ -97,8 +98,9 @@ class MascotaController extends Controller
         $movimiento->data = json_encode([
             'cliente' => $mascota->client->toArray(),
             'mascota' => $mascota->toArray(),
-            'pago' => ['estado' => 'exitoso', 'valor' => trans('fields.suscripcion.costo')]
+            'pago' => ['estado' => 'exitoso', 'valor' => floatval(trans('fields.suscripcion.costo'))]
         ]);
+        $movimiento->save();
         session()->flash('success', trans('messages.mascota.action.create'));
         return response()->redirectToRoute('mascota.list', ['client' => $client]);
     }
@@ -148,9 +150,6 @@ class MascotaController extends Controller
         $mascota->fecha_nacimiento = $request->fecha_nacimiento;
         $mascota->save();
 
-
-
-
         session()->flash('success', trans('messages.mascota.action.edit'));
         return response()->redirectToRoute('mascota.list', ['client' => $mascota->client_id]);
     }
@@ -163,8 +162,10 @@ class MascotaController extends Controller
      */
     public function destroy($id)
     {
-        Mascota::findOrFail($id)->delete();
-
+        $mascota = Mascota::findOrFail($id);
+        $mascota->suscripcion->movimientos()->delete();
+        $mascota->suscripcion()->delete();
+        $mascota->delete();
         session()->flash('success', trans('messages.mascota.action.delete'));
         return redirect()->back();
     }
