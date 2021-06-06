@@ -22,7 +22,8 @@ return [
     ],
     'actions' => [
         'cancel' => 'Cancelar',
-        'save_edit' => 'Guardar Cambios'
+        'save_edit' => 'Guardar Cambios',
+        'save' => 'Guardar'
     ]
 
 ];

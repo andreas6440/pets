@@ -52,7 +52,11 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+
+        return response(
+            view('client.create', ['client' => new Client()]),
+            200
+        );
     }
 
     /**
@@ -64,16 +68,14 @@ class ClientController extends Controller
     public function store(ClientStore $request)
     {
 
-
         $client = new Client();
         $client->nombre = $request->nombre;
         $client->apellido = $request->apellido;
         $client->email = $request->email;
         $client->save();
 
-        session()->flash('success', trans('messages.clients.create'));
-
-        return response()->json(['client' => $client])->setStatusCode(200);
+        session()->flash('success', trans('messages.client.action.create'));
+        return response()->redirectToRoute('client.list');
     }
 
     /**
@@ -119,7 +121,7 @@ class ClientController extends Controller
         $client->email = $request->email;
         $client->save();
 
-        session()->flash('success', trans('messages.client.edit'));
+        session()->flash('success', trans('messages.client.action.edit'));
         return response()->redirectToRoute('client.list');
     }
 
@@ -133,7 +135,7 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
         $client->delete();
-        session()->flash('success', trans('messages.client.delete'));
-        return response()->redirectToRoute('client.list');;
+        session()->flash('success', trans('messages.client.action.delete'));
+        return response()->redirectToRoute('client.list');
     }
 }

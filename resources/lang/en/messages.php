@@ -16,9 +16,13 @@ return [
     'client' => [
         'list' => 'Lista de clientes',
         'edit' => 'Editar cliente',
-        'create' => 'the client has been created successfully',
-        'edit' => 'El cliente fue editado correctamente',
-        'delete' => 'El cliente fue eliminado correctamente',
+        'create' => 'Nuevo Cliente',
+        'action' => [
+            'create' => 'El cliente fue creado correctamente',
+            'edit' => 'El cliente fue editado correctamente',
+            'delete' => 'El cliente fue eliminado correctamente',
+
+        ]
     ]
 
 ];

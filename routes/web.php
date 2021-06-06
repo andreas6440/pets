@@ -22,3 +22,5 @@ Route::get('/datatable/clients', [ClientController::class, 'datatable'])->name('
 Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->where('id', '[0-9]+')->name('client.edit');
 Route::post('/clients/{id}/update', [ClientController::class, 'update'])->where('id', '[0-9]+')->name('client.update');
 Route::get('/clients/{id}/destroy', [ClientController::class, 'destroy'])->where('id', '[0-9]+')->name('client.destroy');
+Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
+Route::post('/clients/create', [ClientController::class, 'store'])->name('client.store');
