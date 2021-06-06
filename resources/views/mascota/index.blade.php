@@ -1,7 +1,7 @@
 @extends('layout.page')
 
 @php(
-    $title = trans('messages.client.list')
+    $title = trans('messages.mascota.list')
 )
 @section('title', implode(' - ', [
     config('app.name'),
@@ -19,11 +19,11 @@
                     <table id="laravel_datatable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ trans('fields.client.id') }}</th>
-                                <th>{{ trans('fields.client.nombre') }}</th>
-                                <th>{{ trans('fields.client.apellido') }}</th>
-                                <th>{{ trans('fields.client.email') }}</th>
-                                <th>{{ trans('fields.client.accion') }}</th>
+                                <th>{{ trans('fields.mascota.id') }}</th>
+                                <th>{{ trans('fields.mascota.name') }}</th>
+                                <th>{{ trans('fields.mascota.race') }}</th>
+                                <th>{{ trans('fields.mascota.date') }}</th>
+                                <th>{{ trans('fields.mascota.action') }}</th>
                                 
                             </tr>
                         </thead>
@@ -35,6 +35,7 @@
         <!-- /.col -->
 
 @stop
+
 @section('js')
     <script>
        
@@ -42,13 +43,13 @@
             const table = $('#laravel_datatable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": '/datatable/clients',
+                "ajax": "{{ route('mascota.datatable',['client'=>$client->id]) }}",
                
                 "columns": [
                     {data: 'id'},
                     {data: 'nombre'},
-                    {data: 'apellido'},
-                    {data: 'email'},
+                    {data: 'raza'},
+                    {data: 'fecha_nacimiento'},
                     {
                         defaultContent: null,
                         sortable: false,
@@ -71,13 +72,7 @@
                                 </a>
                             </li>`;
                             }
-                            if(full.mascota_url) {
-                                base += `<li class="list-inline-item">
-                                <a href="${full.mascota_url}" class="btn btn-block btn-success" title="Mascotas">
-                                    <i class="fas fa-user"></i>
-                                </a>
-                            </li>`;
-                            }
+                          
 
                             base += `
                             </ul>
@@ -96,3 +91,4 @@
         });
     </script>
 @stop
+

@@ -20,4 +20,9 @@ class Mascota extends Model
         'raza',
         'fecha_nacimiento'
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'id', 'client_id');
+    }
 }

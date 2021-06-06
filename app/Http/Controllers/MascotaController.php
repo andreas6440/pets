@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Mascota;
 use Illuminate\Http\Request;
 
 class MascotaController extends Controller
@@ -11,11 +13,38 @@ class MascotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($client)
     {
-        //
-    }
+        $client = Client::findOrFail($client);
 
+        return response(
+            view('mascota.index', ['client' => $client]),
+            200
+        );
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable($client)
+    {
+        $client = Client::find($client);
+        $mascota = $client->mascota;
+        $mascota =  $mascota->map(function (Mascota  $mascota) {
+            return array_merge($mascota->toArray(), [
+                'edit_url' => route('mascota.edit', [
+                    'id' => $mascota->id,
+                ]),
+                'delete_url' =>  route('mascota.destroy', [
+                    'id' =>  $mascota->id,
+                ]),
+
+
+            ]);
+        });
+        return datatables()->of($mascota->toArray())->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -39,6 +39,9 @@ class ClientController extends Controller
                 'delete_url' =>  route('client.destroy', [
                     'id' => $client->id,
                 ]),
+                'mascota_url' =>  route('mascota.list', [
+                    'client' => $client->id,
+                ]),
 
             ]);
         });

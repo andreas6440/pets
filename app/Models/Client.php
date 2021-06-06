@@ -26,4 +26,9 @@ class Client extends Model
         'apellido',
         'email'
     ];
+
+    public function mascota()
+    {
+        return $this->hasMany(Mascota::class, 'client_id');
+    }
 }

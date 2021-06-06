@@ -23,6 +23,17 @@ return [
             'delete' => 'El cliente fue eliminado correctamente',
 
         ]
+    ],
+    'mascota' => [
+        'list' => 'Lista de mascotas',
+        'edit' => 'Editar Mascota',
+        'create' => 'Nuevo Mascota',
+        'action' => [
+            'create' => 'La mascota fue creada correctamente',
+            'edit' => 'La mascota fue editada correctamente',
+            'delete' => 'La mascota fue eliminada correctamente',
+
+        ]
     ]
 
 ];

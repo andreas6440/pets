@@ -20,6 +20,13 @@ return [
         'email' => 'Email',
         'action' => 'Acciones'
     ],
+    'mascota' => [
+        'id' => 'ID',
+        'name' => 'Nombre',
+        'race' => 'Raza',
+        'date' => 'Nacimiento',
+        'action' => 'Acciones'
+    ],
     'actions' => [
         'cancel' => 'Cancelar',
         'save_edit' => 'Guardar Cambios',
