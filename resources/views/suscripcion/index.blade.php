@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                
+                                <th>{{ trans('fields.suscripcion.id') }}</th>
                                 <th>{{ trans('fields.suscripcion.monto') }}</th>
                                 <th>{{ trans('fields.suscripcion.tipo_suscripcion') }}</th>
                                 <th>{{ trans('fields.suscripcion.date') }}</th>                               
@@ -44,14 +45,13 @@
           
             const table = $('#laravel_datatable').DataTable({
                 "processing": true,
-                "serverSide": true,
-              
-
+                "serverSide": true,              
+                order: [[ 0, "desc" ]],
                 "ajax": "{{ route('datatable.movimientos.list',['suscripcion'=>$suscripcion]) }}",
                
                 "columns": [
                    
-                   
+                    {data:'id'},
                     {data: 'monto'},
                     {data: 'tipo'},
                     {data: 'date'},
@@ -83,6 +83,14 @@
                         },
                     },
 
+                ] ,
+                "columnDefs": [ 
+                    {
+                        "targets": [ 0 ],
+                        "visible": false,
+                        "searchable": true
+                    },
+                    
                 ]
             });
 

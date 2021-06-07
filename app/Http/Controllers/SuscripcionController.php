@@ -113,7 +113,6 @@ class SuscripcionController extends Controller
      */
     public function destroy($id)
     {
-
         SuscripcionMovimiento::find($id)->delete();
         session()->flash('success', trans('messages.suscripcion.action.delete'));
         return redirect()->back();

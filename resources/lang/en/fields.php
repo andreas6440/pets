@@ -29,6 +29,7 @@ return [
         'action' => 'Acciones'
     ],
     'suscripcion' => [
+        'id' => 'ID',
         'costo' => '600.50',
         'monto' => 'Monto',
         'tipo_suscripcion' => 'Tipo de pago',
