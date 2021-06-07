@@ -30,6 +30,10 @@ return [
     ],
     'suscripcion' => [
         'costo' => '600.50',
+        'monto' => 'Monto',
+        'tipo_suscripcion' => 'Tipo de pago',
+        'date' => 'Fecha de pago',
+        'action' => 'Acciones',
         'tipo' => [
             'pago',
             'impago',

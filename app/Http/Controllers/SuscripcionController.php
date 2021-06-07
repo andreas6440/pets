@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SuscripcionMovimiento;
 use Illuminate\Http\Request;
 
 class SuscripcionController extends Controller
@@ -11,9 +12,32 @@ class SuscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($suscripcion)
     {
-        //
+        return response(
+            view('suscripcion.index', ['suscripcion' => $suscripcion]),
+            200
+        );
+    }
+
+    public function datatable($suscripcion)
+    {
+
+        $movimientos = SuscripcionMovimiento::where('suscripcion_id', $suscripcion)->orderBy('created_at')->get();
+
+        $movimientos =  $movimientos->map(function (SuscripcionMovimiento $movimiento) {
+            $movimiento->data = json_decode($movimiento->data);
+
+            return array_merge($movimiento->toArray(), [
+                'delete_url' =>  route('movimiento.destroy', [
+                    'id' =>  $movimiento->id,
+                ]),
+                'date' => date("Y-m-d", strtotime($movimiento->created_at)),
+                'monto' => $movimiento->data->pago->valor,
+
+            ]);
+        });
+        return datatables()->of($movimientos->toArray())->toJson();
     }
 
     /**

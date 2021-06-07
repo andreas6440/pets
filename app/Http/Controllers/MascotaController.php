@@ -43,6 +43,9 @@ class MascotaController extends Controller
                 'delete_url' =>  route('mascota.destroy', [
                     'id' =>  $mascota->id,
                 ]),
+                'suscripcion_url' =>  route('movimientos.list', [
+                    'suscripcion' =>  $mascota->suscripcion->id,
+                ]),
                 'suscripcion' => date("Y-m-d", strtotime($mascota->suscripcion->fecha_alta_suscripcion)),
 
 

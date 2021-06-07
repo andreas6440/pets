@@ -34,6 +34,17 @@ return [
             'delete' => 'La mascota fue eliminada correctamente',
 
         ]
-    ]
+    ],
+    'suscripcion' => [
+        'list' => 'Lista de movimientos',
+        'edit' => 'Editar Movimiento',
+        'create' => 'Nuevo pago de suscripción',
+        'action' => [
+            'create' => 'El pago fue realizado correctamente',
+            'edit' => 'El pago fue editado correctamente',
+            'delete' => 'El pago fue eliminado correctamente',
+
+        ]
+    ],
 
 ];

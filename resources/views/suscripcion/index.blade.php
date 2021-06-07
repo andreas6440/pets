@@ -1,7 +1,7 @@
 @extends('layout.page')
 
 @php(
-    $title = trans('messages.mascota.list')
+    $title = trans('messages.suscripcion.list')
 )
 @section('title', implode(' - ', [
     config('app.name'),
@@ -13,18 +13,17 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="m-0 text-dark">{{ $title }} <a href="{{ route('mascota.create',['client'=>$client->id]) }}" class="btn btn-success" title="Nuevo Client"><i class="fas fa-plus"></i></a></h1>
+                    <h1 class="m-0 text-dark">{{ $title }} </h1>
                 </div>
                 <div class="card-body">
                     <table id="laravel_datatable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ trans('fields.mascota.id') }}</th>
-                                <th>{{ trans('fields.mascota.name') }}</th>
-                                <th>{{ trans('fields.mascota.race') }}</th>
-                                <th>{{ trans('fields.mascota.date') }}</th>
-                                <th>{{ trans('fields.mascota.suscripcion') }}</th>
-                                <th>{{ trans('fields.mascota.action') }}</th>
+                               
+                                <th>{{ trans('fields.suscripcion.monto') }}</th>
+                                <th>{{ trans('fields.suscripcion.tipo_suscripcion') }}</th>
+                                <th>{{ trans('fields.suscripcion.date') }}</th>                               
+                                <th>{{ trans('fields.suscripcion.action') }}</th>
                                 
                             </tr>
                         </thead>
@@ -41,17 +40,19 @@
     <script>
        
         $(document).ready(function() {
+          
             const table = $('#laravel_datatable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ route('mascota.datatable',['client'=>$client->id]) }}",
+                "ajax": "{{ route('datatable.movimientos.list',['suscripcion'=>$suscripcion]) }}",
                
                 "columns": [
-                    {data: 'id'},
-                    {data: 'nombre'},
-                    {data: 'raza'},
-                    {data: 'fecha_nacimiento'},
-                    {data: 'suscripcion'},
+                   
+                   
+                    {data: 'monto'},
+                    {data: 'tipo'},
+                    {data: 'date'},
+                   
                     {
                         defaultContent: null,
                         sortable: false,
@@ -59,27 +60,15 @@
                             let base = `<td class="text-center">
                                 <ul class="list-inline">`;
 
-                            if(full.edit_url) {
-                                base += `<li class="list-inline-item">
-                                <a href="${full.edit_url}" class="btn btn-block btn-primary" title="Editar">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                            </li>`;
-                            }
-                            if(full.delete_url) {
+                           
+                            if(full.delete_url && full.tipo!=='impago') {
                                 base += `<li class="list-inline-item">
                                 <a  href="#" onclick='deleteConfirm("${full.delete_url}")' class="btn btn-block btn-danger " title="Borrar">
                                     <i class="fas fa-user"></i>
                                 </a>
                             </li>`;
                             }
-                            if(full.suscripcion_url) {
-                                base += `<li class="list-inline-item">
-                                    <a href="${full.suscripcion_url}" class="btn btn-block btn-success" title="Movimientos">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                            </li>`;
-                            }
+                            
                           
 
                             base += `
@@ -94,8 +83,6 @@
             });
 
           
-
-           
         });
     </script>
 @stop
