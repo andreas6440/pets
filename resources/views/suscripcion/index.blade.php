@@ -68,7 +68,7 @@
                             if(full.delete_url && full.tipo!=='impago') {
                                 base += `<li class="list-inline-item">
                                 <a  href="#" onclick='deleteConfirm("${full.delete_url}")' class="btn btn-block btn-danger " title="Borrar">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </li>`;
                             }

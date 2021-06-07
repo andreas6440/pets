@@ -19,7 +19,7 @@
                     <table id="laravel_datatable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ trans('fields.client.id') }}</th>
+                           
                                 <th>{{ trans('fields.client.nombre') }}</th>
                                 <th>{{ trans('fields.client.apellido') }}</th>
                                 <th>{{ trans('fields.client.email') }}</th>
@@ -45,7 +45,7 @@
                 "ajax": '/datatable/clients',
                
                 "columns": [
-                    {data: 'id'},
+                   
                     {data: 'nombre'},
                     {data: 'apellido'},
                     {data: 'email'},
@@ -67,14 +67,14 @@
                             if(full.delete_url) {
                                 base += `<li class="list-inline-item">
                                 <a  href="#" onclick='deleteConfirm("${full.delete_url}")' class="btn btn-block btn-danger " title="Borrar">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </li>`;
                             }
                             if(full.mascota_url) {
                                 base += `<li class="list-inline-item">
                                 <a href="${full.mascota_url}"  class="btn btn-block btn-success" title="Mascotas">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-paw"></i>
                                 </a>
                             </li>`;
                             }

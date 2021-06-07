@@ -19,7 +19,7 @@
                     <table id="laravel_datatable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ trans('fields.mascota.id') }}</th>
+                              
                                 <th>{{ trans('fields.mascota.name') }}</th>
                                 <th>{{ trans('fields.mascota.race') }}</th>
                                 <th>{{ trans('fields.mascota.date') }}</th>
@@ -47,7 +47,7 @@
                 "ajax": "{{ route('mascota.datatable',['client'=>$client->id]) }}",
                
                 "columns": [
-                    {data: 'id'},
+                    
                     {data: 'nombre'},
                     {data: 'raza'},
                     {data: 'fecha_nacimiento'},
@@ -69,14 +69,14 @@
                             if(full.delete_url) {
                                 base += `<li class="list-inline-item">
                                 <a  href="#" onclick='deleteConfirm("${full.delete_url}")' class="btn btn-block btn-danger " title="Borrar">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-trash"></i>
                                 </a>
                             </li>`;
                             }
                             if(full.suscripcion_url) {
                                 base += `<li class="list-inline-item">
                                     <a href="${full.suscripcion_url}" class="btn btn-block btn-success" title="Movimientos">
-                                    <i class="far fa-edit"></i>
+                                    <i class="fas fa-hand-holding-usd"></i>
                                 </a>
                             </li>`;
                             }
