@@ -34,6 +34,7 @@ return [
         'tipo_suscripcion' => 'Tipo de pago',
         'date' => 'Fecha de pago',
         'action' => 'Acciones',
+        'estado' => 'Estado',
         'tipo' => [
             'pago',
             'impago',

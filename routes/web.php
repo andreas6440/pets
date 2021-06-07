@@ -39,8 +39,8 @@ Route::post('/mascota/{id}/update', [MascotaController::class, 'update'])->where
 Route::get('/mascota/{id}/destroy', [MascotaController::class, 'destroy'])->where('id', '[0-9]+')->name('mascota.destroy');
 
 
-Route::get('/suscripcion/{suscripcion}/movientos', [SuscripcionController::class, 'index'])->where('client', '[0-9]+')->name('movimientos.list');
-Route::get('/datatable/suscripcion/{suscripcion}/movientos', [SuscripcionController::class, 'datatable'])->where('client', '[0-9]+')->name('datatable.movimientos.list');
-Route::get('/suscripcion/{suscripcion}/movientos/create', [SuscripcionController::class, 'create'])->where('client', '[0-9]+')->name('movimiento.create');
-Route::post('/suscripcion/{suscripcion}/movientos/store', [SuscripcionController::class, 'index'])->where('client', '[0-9]+')->name('movimiento.store');
-Route::get('movientos/{id}/destroy', [SuscripcionController::class, 'index'])->where('client', '[0-9]+')->name('movimiento.destroy');
+Route::get('/suscripcion/{suscripcion}/movientos', [SuscripcionController::class, 'index'])->where('suscripcion', '[0-9]+')->name('movimientos.list');
+Route::get('/datatable/suscripcion/{suscripcion}/movientos', [SuscripcionController::class, 'datatable'])->where('suscripcion', '[0-9]+')->name('datatable.movimientos.list');
+Route::get('/suscripcion/{suscripcion}/movientos/create', [SuscripcionController::class, 'create'])->where('suscripcion', '[0-9]+')->name('movimiento.create');
+Route::post('/suscripcion/{suscripcion}/movientos/store', [SuscripcionController::class, 'store'])->where('suscripcion', '[0-9]+')->name('movimiento.store');
+Route::get('/movientos/{id}/destroy', [SuscripcionController::class, 'destroy'])->where('id', '[0-9]+')->name('movimiento.destroy');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovimientoStore;
+use App\Models\Suscripcion;
 use App\Models\SuscripcionMovimiento;
 use Illuminate\Http\Request;
 
@@ -23,7 +25,7 @@ class SuscripcionController extends Controller
     public function datatable($suscripcion)
     {
 
-        $movimientos = SuscripcionMovimiento::where('suscripcion_id', $suscripcion)->orderBy('created_at')->get();
+        $movimientos = SuscripcionMovimiento::where('suscripcion_id', $suscripcion)->get();
 
         $movimientos =  $movimientos->map(function (SuscripcionMovimiento $movimiento) {
             $movimiento->data = json_decode($movimiento->data);
@@ -34,6 +36,7 @@ class SuscripcionController extends Controller
                 ]),
                 'date' => date("Y-m-d", strtotime($movimiento->created_at)),
                 'monto' => $movimiento->data->pago->valor,
+                'estado' => ucfirst($movimiento->data->pago->estado),
 
             ]);
         });
@@ -45,9 +48,12 @@ class SuscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($suscripcion)
     {
-        //
+        return response(
+            view('suscripcion.create', ['suscripcion' => $suscripcion]),
+            200
+        );
     }
 
     /**
@@ -56,44 +62,48 @@ class SuscripcionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovimientoStore $request, $suscripcion)
     {
-        //
+        //dd($request->request);
+        $movimiento = SuscripcionMovimiento::where('suscripcion_id', $suscripcion)->get()->groupBy('tipo')->toArray();
+        $impago = isset($movimiento['impago'])  ? count($movimiento['impago']) * floatval(trans('fields.suscripcion.costo')) : 0;
+        $pago =  0;
+        if (isset($movimiento['pago'])) {
+
+            foreach ($movimiento['pago'] as $item) {
+                $data = json_decode($item['data']);
+                if ($data->pago->estado == 'exitoso')
+                    $pago = $pago + $data->pago->valor;
+            }
+        }
+
+        $suscripcion = Suscripcion::find($suscripcion);
+        $movimiento = new SuscripcionMovimiento();
+        $movimiento->suscripcion_id =  $suscripcion->id;
+        $movimiento->tipo = trans('fields.suscripcion.tipo.0');
+        if ($pago < $impago) {
+
+            $movimiento->data = json_encode([
+                'cliente' => $suscripcion->mascota->client->toArray(),
+                'mascota' => $suscripcion->mascota->toArray(),
+                'pago' => ['estado' => 'exitoso', 'valor' => floatval($request->monto)]
+            ]);
+            $movimiento->save();
+            session()->flash('success', trans('messages.suscripcion.action.create'));
+            return response()->redirectToRoute('movimientos.list', ['suscripcion' => $suscripcion]);
+        } else {
+            $movimiento->data = json_encode([
+                'cliente' => $suscripcion->mascota->client->toArray(),
+                'mascota' => $suscripcion->mascota->toArray(),
+                'pago' => ['estado' => 'fallo', 'valor' => floatval($request->monto)]
+            ]);
+            $movimiento->save();
+            session()->flash('error', trans('messages.suscripcion.action.error'));
+            return response()->redirectToRoute('movimientos.list', ['suscripcion' => $suscripcion]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -103,6 +113,9 @@ class SuscripcionController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        SuscripcionMovimiento::find($id)->delete();
+        session()->flash('success', trans('messages.suscripcion.action.delete'));
+        return redirect()->back();
     }
 }

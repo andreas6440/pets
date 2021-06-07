@@ -13,7 +13,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="m-0 text-dark">{{ $title }} </h1>
+                    <h1 class="m-0 text-dark">{{ $title }} <a href="{{ route('movimiento.create',['suscripcion'=>$suscripcion]) }}" class="btn btn-success" title="Nuevo Client"><i class="fas fa-plus"></i></a></h1>
                 </div>
                 <div class="card-body">
                     <table id="laravel_datatable" class="table table-bordered table-striped">
@@ -23,6 +23,7 @@
                                 <th>{{ trans('fields.suscripcion.monto') }}</th>
                                 <th>{{ trans('fields.suscripcion.tipo_suscripcion') }}</th>
                                 <th>{{ trans('fields.suscripcion.date') }}</th>                               
+                                <th>{{ trans('fields.suscripcion.estado') }}</th>                               
                                 <th>{{ trans('fields.suscripcion.action') }}</th>
                                 
                             </tr>
@@ -44,6 +45,8 @@
             const table = $('#laravel_datatable').DataTable({
                 "processing": true,
                 "serverSide": true,
+              
+
                 "ajax": "{{ route('datatable.movimientos.list',['suscripcion'=>$suscripcion]) }}",
                
                 "columns": [
@@ -52,6 +55,7 @@
                     {data: 'monto'},
                     {data: 'tipo'},
                     {data: 'date'},
+                    {data: 'estado'},
                    
                     {
                         defaultContent: null,

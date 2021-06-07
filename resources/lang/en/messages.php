@@ -41,6 +41,7 @@ return [
         'create' => 'Nuevo pago de suscripción',
         'action' => [
             'create' => 'El pago fue realizado correctamente',
+            'error' => 'El pago no pudo ser realizado',
             'edit' => 'El pago fue editado correctamente',
             'delete' => 'El pago fue eliminado correctamente',
 
